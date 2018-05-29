@@ -12,6 +12,7 @@ compAns comp(string la, string lb);
 string multprivate(string la, char lb);
 string multpublic(string la, string lb);
 string fillWithZeros(string la, int br);
+string addZeros(string la, int br);
 
 
 string add(string la, string lb)
@@ -69,12 +70,13 @@ string multprivate(string la, char lb)
 {
     string sum = "";
     reverse(la.begin(), la.end());
-
+	if(lb == '0')
+		return "0";
     int prenos = 0;
     for(int i = 0;i < la.size(); ++i)
     {
         if(prenos + ( (la[i] - '0') * (lb  - '0') ) > 9 )
-        {
+		{
             sum = sum + char( (prenos + ( (la[i] - '0') * (lb  - '0') ) ) % 10 + '0');
             prenos = (prenos + ( (la[i] - '0') * (lb  - '0') ) ) / 10;
         }
@@ -88,6 +90,7 @@ string multprivate(string la, char lb)
         sum = sum + char(prenos + '0');
 
     reverse(sum.begin(), sum.end());
+    //cout << sum << endl;
     return sum;
 }
 
@@ -102,22 +105,27 @@ string fillWithZeros(string la, int br)
 
 string multpublic(string la, string lb)
 {
-    string sum = "";
+    string sum = "0";
     if(comp(la, lb) == smaller)
         swap(la, lb);
 
+	int j = 0;
     for(int i = lb.size() - 1; i >= 0; --i)
     {
-        string tsum = "";
-        sum = add(sum, multprivate(la, lb[i]));
-        /*sum = "";
-        sum = sum + tsum;*/
+		//cout << sum << " " << multprivate(la, lb[i])) << endl;
+        sum = add(sum, addZeros(multprivate(la, lb[i]), j));
+        //cout << sum << endl;
+        ++j;
     }
     return sum;
 }
 
-
-
+string addZeros(string la, int br)
+{
+	for(int i = 0;i < br; ++i)
+		la = la + '0';
+	return la;
+}
 
 int main()
 {
@@ -131,7 +139,7 @@ int main()
        return 0;
     }
 
-    cout << multprivate(a, b[0]) << " " << add(a, b) << endl;
+    //cout << multprivate(a, b[0]) << " " << add(a, b) << endl;
     cout << multpublic(a, b) << endl;
     return 0;
 }
