@@ -11,9 +11,9 @@ string MultiplyLongByShort(string la, char lb)
 	int carry = 0;
 	for(int i = la.size() - 1;i >= 0; --i)
 	{
-		cout << sum << " " << la[i] << " " << lb << " " << carry <<endl;
+		//cout << sum << " " << la[i] << " " << lb << " " << carry <<endl;
 		sum = sum + char( ((la[i] - '0') * (lb - '0') + carry) % 10 + '0' );
-		carry = ((la[i] - '0') * (lb - '0')) / 10;
+		carry = ((la[i] - '0') * (lb - '0') + carry) / 10;
 	}
 	if(carry > 0)
 		sum = sum + char(carry + '0');
