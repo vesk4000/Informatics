@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "multiply.cpp"
 
 using namespace std;
 
@@ -35,6 +36,24 @@ void Setup()
 	cmd.command = "quit";
 	cmd.nArgs = 0;
 	commands.push_back(cmd);
+	cmd.command = "compare";
+	cmd.nArgs = 2;
+	commands.push_back(cmd);
+	cmd.command = "bigger";
+	cmd.nArgs = 2;
+	commands.push_back(cmd);
+	cmd.command = "smaller";
+	cmd.nArgs = 2;
+	commands.push_back(cmd);
+	cmd.command = "add";
+	cmd.nArgs = 2;
+	commands.push_back(cmd);
+	cmd.command = "multiplyLongByShort";
+	cmd.nArgs = 2;
+	commands.push_back(cmd);
+	cmd.command = "multiply";
+	cmd.nArgs = 2;
+	commands.push_back(cmd);
 }
 
 void Loop()
@@ -52,7 +71,10 @@ void InitCommand()
 	cout << ">";
 	string command;
 	getline(cin, command);
+	if(command == "")
+		return;
 	vector <string> args = Split(command, " ");
+
 	int nArgs = args.size();
 	bool flag = false;
 	for(int i = 0;i < commands.size(); ++i)
@@ -75,9 +97,48 @@ void InitCommand()
 
 void ExecuteCommand(vector <string> args)
 {
-	if(args[0] == quit)
+	if(args[0] == "quit")
 	{
 		shouldContinue = false;
+	}
+	else if(args[0] == "compare")
+	{
+		compAns ans = Compare(args[1], args[2]);
+		if(ans == smaller)
+		{
+			cout << "a is smaller than b" << endl;
+			return;
+		}
+		if(ans == equul)
+		{
+			cout << "a is equal to b" << endl;
+			return;
+		}
+		if(ans == bigger)
+		{
+			cout << "a is bigger than b" << endl;
+			return;
+		}
+	}
+	else if(args[0] == "bigger")
+	{
+		cout << Bigger(args[1], args[2]) << endl;
+	}
+	else if(args[0] == "smaller")
+	{
+		cout << Smaller(args[1], args[2]) << endl;
+	}
+	else if(args[0] == "add")
+	{
+		cout << Add(args[1], args[2]) << endl;
+	}
+	else if(args[0] == "multiplyLongByShort")
+	{
+		cout << MultiplyLongByShort(args[1], args[2][0]) << endl;
+	}
+	else if(args[0] == "multiply")
+	{
+		cout << Multiply(args[1], args[2]) << endl;
 	}
 }
 
@@ -99,3 +160,4 @@ vector <string> Split(string stringToBeSplitted, string delimeter)
      }
      return splittedString;
 }
+
