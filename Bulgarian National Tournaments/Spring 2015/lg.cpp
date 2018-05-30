@@ -2,144 +2,125 @@
 
 using namespace std;
 
-enum compAns {smaller, ravni, bigger};
+enum compAns {smaller, equul, bigger};
+compAns Compare(string la, string lb);
+string Add(string la, string lb);
+string FillFront(string la, int ln);
+string MultiplyLongByShort(string la, char lb);
+string Multiply(string la, string lb);
+string FillBack(string la, int ln);
 
-string a, b;
-string k;
-
-string add(string la, string lb);
-compAns comp(string la, string lb);
-string multprivate(string la, char lb);
-string multpublic(string la, string lb);
-string fillWithZeros(string la, int br);
-string addZeros(string la, int br);
-
-
-string add(string la, string lb)
+int main()
 {
-    string sum = "";
-    if(comp(la, lb) == smaller)
-        swap(la, lb);
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+	string a, b;
+	string k;
+	cin >> a >> b;
 
-        lb = fillWithZeros(lb,la.size() -  lb.size());
-    reverse(la.begin(), la.end());
-    reverse(lb.begin(), lb.end());
-
-
-
-    int prenos = 0;
-    for(int i = 0;i < la.size(); ++i)
-    {
-        if(prenos + la[i] - '0' + lb[i]  - '0' > 9 )
-        {
-            sum = sum + char( prenos + (la[i] - '0') + (lb[i]  - '0') - 10 +'0' );
-            prenos = 1;
-        }
-        else
-        {
-            sum = sum + char( prenos + la[i] - '0' + lb[i]  - '0' + '0' );
-            prenos = 0;
-        }
-    }
-    if(prenos == 1)
-    {
-        sum = sum + '1';
-    }
-    reverse(sum.begin(), sum.end() );
-    return sum;
-}
-
-compAns comp(string la, string lb)///a comp. to b
-{
-    if(la.size() < lb.size())
-        return smaller;
-    if(la.size() > lb.size())
-        return bigger;
-
-    for(int i = 0;i < la.size(); ++i)
-    {
-        if(la[i] < lb[i])
-            return smaller;
-        if(la[i] > lb[i])
-            return bigger;
-    }
-    return ravni;
-}
-
-string multprivate(string la, char lb)
-{
-    string sum = "";
-    reverse(la.begin(), la.end());
-	if(lb == '0')
-		return "0";
-    int prenos = 0;
-    for(int i = 0;i < la.size(); ++i)
-    {
-        if(prenos + ( (la[i] - '0') * (lb  - '0') ) > 9 )
+	if(Compare(a, b) == smaller)
+	{
+		cout << 0 << endl;
+		return 0;
+	}
+	string orb = b;
+	for(k = "1";;k = Add(k, "1"))
+	{
+		b = Multiply(b, orb);
+		//cout << k << " " << b << endl;
+		if(Compare(a, b) == smaller)
 		{
-            sum = sum + char( (prenos + ( (la[i] - '0') * (lb  - '0') ) ) % 10 + '0');
-            prenos = (prenos + ( (la[i] - '0') * (lb  - '0') ) ) / 10;
-        }
-        else
-        {
-            sum = sum + char(prenos + ( (la[i] - '0') * (lb  - '0') )  + '0');
-            prenos = 0;
-        }
-    }
-    if(prenos > 0)
-        sum = sum + char(prenos + '0');
-
-    reverse(sum.begin(), sum.end());
-    //cout << sum << endl;
-    return sum;
+			cout << k << endl;
+			return 0;
+		}
+	}
+	return 0;
 }
 
-string fillWithZeros(string la, int br)
+///Compare
+compAns Compare(string la, string lb)
 {
-    for(int i= 0;i < br;++i)
-    {
-        la = '0' + la;
-    }
-    return la;
+	if(la.size() > lb.size())
+		return bigger;
+	if(la.size() < lb.size())
+		return smaller;
+
+	for(int i = 0;i < la.size(); ++i)
+	{
+		if(la[i] > lb[i])
+			return bigger;
+		if(la[i] < lb[i])
+			return smaller;
+	}
+
+	return equul;
 }
 
-string multpublic(string la, string lb)
+///Add
+string Add(string la, string lb)
 {
-    string sum = "0";
-    if(comp(la, lb) == smaller)
-        swap(la, lb);
+	if(Compare(la, lb) == smaller)
+		swap(la, lb);
+	lb = FillFront(lb, la.size() - lb.size());
 
-	int j = 0;
-    for(int i = lb.size() - 1; i >= 0; --i)
-    {
-		//cout << sum << " " << multprivate(la, lb[i])) << endl;
-        sum = add(sum, addZeros(multprivate(la, lb[i]), j));
-        //cout << sum << endl;
-        ++j;
-    }
-    return sum;
+	string sum = "";
+	int carry = 0;
+	for(int i = la.size() - 1;i >= 0; --i)
+	{
+		sum = sum + char( ((la[i] - '0') + (lb[i] - '0') + carry) % 10 + '0');
+		carry = ((la[i] - '0') + (lb[i] - '0') + carry) / 10;
+
+	}
+	if(carry == 1)
+		sum = sum + '1';
+	reverse(sum.begin(), sum.end());
+	return sum;
 }
 
-string addZeros(string la, int br)
+///FillFront
+string FillFront(string la, int ln)
 {
-	for(int i = 0;i < br; ++i)
+	for(int i = 0;i < ln; ++i)
+		la = '0' + la;
+	return la;
+}
+
+///FillBack
+string FillBack(string la, int ln)
+{
+	for(int i = 0;i < ln; ++i)
 		la = la + '0';
 	return la;
 }
 
-int main()
+///MultiplyLongByShort
+string MultiplyLongByShort(string la, char lb)
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
+	string sum = "";
+	int carry = 0;
+	for(int i = la.size() - 1;i >= 0; --i)
+	{
+		sum = sum + char( ((la[i] - '0') * (lb - '0') + carry) % 10 + '0' );
+		carry = ((la[i] - '0') * (lb - '0') + carry) / 10;
+	}
+	if(carry > 0)
+		sum = sum + char(carry + '0');
+	reverse(sum.begin(), sum.end());
+	return sum;
+}
 
-    cin >> a >> b;
-    if(comp(a,b) == smaller)
-    {
-       cout << 0 << endl;
-       return 0;
-    }
-
-    //cout << multprivate(a, b[0]) << " " << add(a, b) << endl;
-    cout << multpublic(a, b) << endl;
-    return 0;
+///Multiply
+string Multiply(string la, string lb)
+{
+	if(la == "0" || lb == "0")
+		return "0";
+	string sum = "";
+	int j = 0;
+	for(int i = lb.size() - 1; i >= 0; --i)
+	{
+		sum = Add(sum, FillBack(MultiplyLongByShort(la, lb[i]), j) );
+		++j;
+	}
+	return sum;
 }
