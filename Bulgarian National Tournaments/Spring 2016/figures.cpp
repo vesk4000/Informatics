@@ -144,10 +144,39 @@ int main()
     }
     if(pinp.size() == 6)
 	{
-		if(pinp[0].row == pinp[1].row)
+		if(pinp[0].row != pinp[1].row || pinp[2].row != pinp[3].row || pinp[4].row != pinp[5].row)
 		{
-
+			cout << "INCORRECT" << endl;
+			return 0;
 		}
+		int ans = abs(pinp[0].ninrow - pinp[1].ninrow);
+		if(pinp[0].ninrow != pinp[2].ninrow)
+		{
+			cout << "INCORRECT" << endl;
+			return 0;
+		}
+		if(ans != abs(pinp[3].ninrow - pinp[1].ninrow))
+		{
+			cout << "INCORRECT" << endl;
+			return 0;
+		}
+		if(ans != abs(pinp[0].row - pinp[2].row) || ans != abs(pinp[2].row - pinp[4].row))
+		{
+			cout << "INCORRECT" << endl;
+			return 0;
+		}
+		if(ans != abs(pinp[2].ninrow - pinp[4].ninrow))
+		{
+			cout << "INCORRECT" << endl;
+			return 0;
+		}
+		if(pinp[3].ninrow != pinp[5].ninrow)
+		{
+			cout << "INCORRECT" << endl;
+			return 0;
+		}
+		cout << "H " << ans << endl;
+		return 0;
 	}
     cout << "INCORRECT" << endl;
     return 0;
