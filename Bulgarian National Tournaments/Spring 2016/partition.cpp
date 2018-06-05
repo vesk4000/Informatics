@@ -48,6 +48,11 @@ int main()
 							dp[j][k] = 1;
 				}
 			}
+			if(dp[j][sum] == 1)
+			{
+				ans[i] = 1;
+				j = cn;
+			}
 		}
 		if(dp[cn - 1][sum] == 1)
 			ans[i] = 1;}
