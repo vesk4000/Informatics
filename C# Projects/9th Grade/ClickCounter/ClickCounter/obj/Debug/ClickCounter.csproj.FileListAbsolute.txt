@@ -1,0 +1,8 @@
+C:\Users\zala2\Documents\SharpDevelop Projects\ClickCounter\ClickCounter\bin\Debug\ClickCounter.exe.config
+C:\Users\zala2\Documents\SharpDevelop Projects\ClickCounter\ClickCounter\bin\Debug\ClickCounter.exe
+C:\Users\zala2\Documents\SharpDevelop Projects\ClickCounter\ClickCounter\bin\Debug\ClickCounter.pdb
+C:\Users\zala2\Documents\SharpDevelop Projects\ClickCounter\ClickCounter\obj\Debug\ClickCounter.csprojResolveAssemblyReference.cache
+C:\Users\zala2\Documents\SharpDevelop Projects\ClickCounter\ClickCounter\obj\Debug\ClickCounter.MainForm.resources
+C:\Users\zala2\Documents\SharpDevelop Projects\ClickCounter\ClickCounter\obj\Debug\ClickCounter.csproj.GenerateResource.Cache
+C:\Users\zala2\Documents\SharpDevelop Projects\ClickCounter\ClickCounter\obj\Debug\ClickCounter.exe
+C:\Users\zala2\Documents\SharpDevelop Projects\ClickCounter\ClickCounter\obj\Debug\ClickCounter.pdb
