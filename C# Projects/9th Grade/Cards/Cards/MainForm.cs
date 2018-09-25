@@ -36,7 +36,8 @@ namespace Cards
 			var suits =  new Dictionary<char, string>();
 			cards['K'] = "King";
 			cards['Q'] = "Queen";
-			cards['J'] =  "Jack";
+			cards['J'] = "Jack";
+			cards['A'] = "Ace";
 			suits['D'] = "Diamonds";
 			suits['H'] = "Hearts";
 			suits['S'] = "Spades";
