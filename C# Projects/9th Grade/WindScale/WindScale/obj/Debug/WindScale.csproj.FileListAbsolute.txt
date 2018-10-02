@@ -1,0 +1,8 @@
+D:\Student\9a_4\WindScale\WindScale\bin\Debug\WindScale.exe.config
+D:\Student\9a_4\WindScale\WindScale\bin\Debug\WindScale.exe
+D:\Student\9a_4\WindScale\WindScale\bin\Debug\WindScale.pdb
+D:\Student\9a_4\WindScale\WindScale\obj\Debug\WindScale.csprojResolveAssemblyReference.cache
+D:\Student\9a_4\WindScale\WindScale\obj\Debug\WindScale.MainForm.resources
+D:\Student\9a_4\WindScale\WindScale\obj\Debug\WindScale.csproj.GenerateResource.Cache
+D:\Student\9a_4\WindScale\WindScale\obj\Debug\WindScale.exe
+D:\Student\9a_4\WindScale\WindScale\obj\Debug\WindScale.pdb
