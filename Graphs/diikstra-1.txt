@@ -1,0 +1,73 @@
+#include <bits/stdc++.h>
+#define INF 1000007
+#define MAXN 1000007
+using namespace std;
+long long n, m, dist[MAXN], s, f;
+bool used[MAXN];
+
+struct node
+{
+    long long weight, ver;
+
+    bool operator < (const node &p) const
+    {
+        return p.weight < weight;
+    }
+};
+
+vector <node> v[MAXN];
+priority_queue <node> q;
+
+void input()
+{
+    cin >> n >> m >> s >> f;
+
+    for(int i = 1; i <= m; i++)
+    {
+        long long t, k, w;
+        cin >> t >> k >> w;
+        node curr;
+        curr.weight = w;
+        curr.ver = k;
+        v[t].push_back(curr);
+        curr.ver = t;
+        v[k].push_back(curr);
+    }
+}
+
+void dijkstra()
+{
+    for(int i = 1; i <= n; i++)
+        dist[i] = INF;
+    dist[s] = 0;
+    node curr;
+    curr.ver = s;
+    curr.weight = 0;
+    q.push(curr);
+
+    while(!curr.empty())
+    {
+        node curr = q.top();
+        q.pop();
+
+        if(dist[curr.ver] >= curr.weight)
+        if(!used[curr.ver])
+        {
+            used[curr.ver] = 1;
+            long long sz = v[curr.ver].size();
+
+            for(int i = 0; i < sz; i++)
+            {
+                node nb = v[curr.ver][i];
+                if(nb.weight + curr.weight < dist[nb.ver])
+                {
+                    d[nb.ver] = nb.weight + curr.weight;
+                    nb.weight = dist[nb.ver];
+                    q.push(nb);
+                }
+            }
+        }
+    }
+
+    cout << dist[f] << endl;
+}
