@@ -25,32 +25,32 @@ void find()
     d[1][1] = 1;
     d[2][1] = 1;
     d[3][1] = 1;
-    
+
     /// easily initialize d[1]
-    for (int i = 2; i <= n; i++) 
+    for (int i = 2; i <= n; i++)
     {
         d[1][i] = d[1][i - 1] + i;
         d[1][i] %= MOD;
     }
-    
+
     /// d[2][i] = sum of the product of all couples from (numbers from) [1, i - 1] combined with
     /// the product of all couples made of i and a number from [1, i - 1], which
     /// is equal to i * d[1][i]
-    
+
     /// so d[2][i] = d[2][i - 1] + i * d[1][i]
-    
+
     for (int i = 2; i <= n; i++) /// initialize d[2]
     {
         d[2][i] = d[2][i - 1] + i * d[1][i];
         d[2][i] %= MOD;
     }
-    
+
     /// d[3][i] = sum of the product of all triplets from [1, i - 1] combined with
     /// the product of all triplets made of i and a couple made from [1, i], which
     /// is equal to i * d[2][i]
-    
+
     /// so d[3][i] = d[3][i - 1] + i * d[2][i]
-    
+
     for (int i = 2; i <= n; i++)
     {
         d[3][i] = d[3][i - 1] + i * d[2][i];
@@ -72,7 +72,7 @@ int main()
     ///                              is BS and detects the code as Python 3
     ///                              for some reason
 
-    return 0;
+    return main();
 }
 /// Hope you guys liked that
 /// See you later
