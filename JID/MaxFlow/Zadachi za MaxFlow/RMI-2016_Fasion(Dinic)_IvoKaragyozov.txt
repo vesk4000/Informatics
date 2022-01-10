@@ -1,0 +1,192 @@
+#include <bits/stdc++.h>
+
+const int64_t INF = 1e18;
+
+class Graph {
+private:
+    struct Node {
+        bool isVisited;
+        int32_t dep;
+        std::vector< int32_t > v;
+    };
+
+    struct Edge {
+        int32_t from, to;
+        int64_t cap;
+
+        Edge(int32_t _from = 0, int32_t _to = 0, int64_t _cap = 0): from(_from), to(_to), cap(_cap) {}
+    };
+
+    int32_t cntNodes, source, sink;
+    std::vector< Node > nodes;
+    std::vector< Edge > edges;
+
+    void Bfs() {
+        for(auto &x : nodes) {
+            x.dep = -1;
+        }
+
+        std::queue< int32_t > q;
+
+        nodes[sink].dep = 0;
+        q.push(sink);
+
+        while(!q.empty()) {
+            int32_t node = q.front();
+            q.pop();
+
+            if(node == source) {
+                break;
+            }
+
+            //for(auto &x : nodes[node].v) {
+            for(int32_t i = 0; i < nodes[node].v.size(); i++) {
+                int32_t x = nodes[node].v[i];
+                  
+                int32_t nxtNode = edges[x].to;
+                if(nodes[nxtNode].dep == -1 && edges[(x ^ 1)].cap > 0) {
+                    q.push(nxtNode);
+                    nodes[nxtNode].dep = nodes[node].dep + 1;
+                }
+            }
+        }
+    }
+
+    int64_t Dfs(int32_t node, int64_t aux) {
+        if(node == sink) {
+            return aux;
+        }
+
+        for(auto &x : nodes[node].v) {
+            int32_t nxtNode = edges[x].to;
+
+            if(nodes[nxtNode].isVisited || nodes[nxtNode].dep != nodes[node].dep - 1 || edges[x].cap == 0) {
+                continue;
+            }
+
+            int64_t y = Dfs(nxtNode, std::min(aux, edges[x].cap));
+
+            if(y != 0) {
+                edges[x].cap -= y;
+                edges[(x ^ 1)].cap += y;
+
+                return y;
+            }
+        }
+
+        nodes[node].isVisited = true;
+        return 0;
+    }
+
+    void DfsAnswer(int32_t node) {
+        nodes[node].isVisited = true;
+
+        for(auto &x : nodes[node].v) {
+            int32_t nxtNode = edges[x].to;
+            if(!nodes[nxtNode].isVisited && edges[x].cap > 0) {
+                DfsAnswer(nxtNode);
+            }
+        }
+    }
+
+public:
+    void Init(int32_t _cntNodes, int32_t _source, int32_t _sink) {
+        cntNodes = _cntNodes;
+        source = _source;
+        sink = _sink;
+
+        nodes.resize(_cntNodes);
+    }
+
+    void AddEdge(int32_t from, int32_t to, int64_t cap) {
+        nodes[from].v.push_back(edges.size());
+        edges.push_back(Edge(from, to, cap));
+
+        nodes[to].v.push_back(edges.size());
+        edges.push_back(Edge(to, from, 0));
+    }
+
+    int64_t Dinic() {
+        int64_t flow = 0;
+
+        while(1) {
+            Bfs();
+
+            if(nodes[source].dep == -1) {
+                break;
+            }
+
+            for(auto &x : nodes) {
+                x.isVisited = false;
+            }
+
+            while(1) {
+                int64_t newFlow = Dfs(source, INF);
+
+                if(newFlow == 0) {
+                    break;
+                }
+
+                flow += newFlow;
+            }
+        }
+
+        return flow;
+    }
+
+    void GetAnswer(std::vector< int32_t > &v) {
+        for(auto &x : nodes) {
+            x.isVisited = false;
+        }
+
+        DfsAnswer(source);
+
+        for(auto &x : nodes[0].v) {
+            if(!nodes[edges[x].to].isVisited) {
+                v.push_back(edges[x].to);
+            }
+        }
+    }
+};
+
+Graph g;
+
+int main() {
+    std::ios_base::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+
+    int32_t n, m;
+    std::cin >> n >> m;
+
+    g.Init(n + m + 2, 0, n + m + 1);
+    for(int32_t i = 1; i <= n; i++) {
+        int32_t t, c;
+        std::cin >> t >> c;
+
+        g.AddEdge(0, i, c);
+    }
+
+    int64_t ans = 0;
+    for(int32_t i = 1; i <= m; i++) {
+        int32_t a, b, c, w;
+        std::cin >> a >> b >> c >> w;
+
+        ans += (int64_t) w;
+
+        g.AddEdge(a, i + n, INF);
+        g.AddEdge(b, i + n, INF);
+        g.AddEdge(c, i + n, INF);
+        g.AddEdge(i + n, n + m + 1, w);
+    }
+
+    std::cout << ans - g.Dinic() << " ";
+
+    std::vector< int32_t > v;
+    g.GetAnswer(v);
+
+    std::cout << v.size() << '\n';
+    for(auto &x : v) {
+        std::cout << x << " ";
+    }
+    std::cout << '\n';
+}
