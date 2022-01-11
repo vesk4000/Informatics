@@ -1,8 +1,0 @@
-D:\Student\9a_4\Cards\Cards\obj\Debug\Cards.csprojResolveAssemblyReference.cache
-D:\Student\9a_4\Cards\Cards\obj\Debug\Cards.MainForm.resources
-D:\Student\9a_4\Cards\Cards\obj\Debug\Cards.csproj.GenerateResource.Cache
-D:\Student\9a_4\Cards\Cards\bin\Debug\Cards.exe.config
-D:\Student\9a_4\Cards\Cards\bin\Debug\Cards.exe
-D:\Student\9a_4\Cards\Cards\bin\Debug\Cards.pdb
-D:\Student\9a_4\Cards\Cards\obj\Debug\Cards.exe
-D:\Student\9a_4\Cards\Cards\obj\Debug\Cards.pdb

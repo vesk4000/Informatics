@@ -1,8 +1,0 @@
-D:\student\8a_4\projectCodeDecode\projectCodeDecode\obj\Debug\projectCodeDecode.csprojResolveAssemblyReference.cache
-D:\student\8a_4\projectCodeDecode\projectCodeDecode\obj\Debug\projectCodeDecode.MainForm.resources
-D:\student\8a_4\projectCodeDecode\projectCodeDecode\obj\Debug\projectCodeDecode.csproj.GenerateResource.Cache
-D:\student\8a_4\projectCodeDecode\projectCodeDecode\bin\Debug\projectCodeDecode.exe.config
-D:\student\8a_4\projectCodeDecode\projectCodeDecode\bin\Debug\projectCodeDecode.exe
-D:\student\8a_4\projectCodeDecode\projectCodeDecode\bin\Debug\projectCodeDecode.pdb
-D:\student\8a_4\projectCodeDecode\projectCodeDecode\obj\Debug\projectCodeDecode.exe
-D:\student\8a_4\projectCodeDecode\projectCodeDecode\obj\Debug\projectCodeDecode.pdb
